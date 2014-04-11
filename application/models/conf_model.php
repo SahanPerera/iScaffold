@@ -119,14 +119,19 @@ class Conf_Model extends CI_Model {
         // Insert table scheme to config table
         foreach( $schema as $k => $table )
         {
-            foreach( $table as $f )
+            foreach( $table as $u =>$f )
             {
                 $this->db->set( 'sf_table', $k );
                 $this->db->set( 'sf_field', $f );
+                $this->db->set( 'sf_label', $f );
+                // $this->db->set( 'sf_desc', $f );
+               if ($u==0) { $this->db->set( 'sf_hidden', '1' ); } 
                 $this->db->insert('sf_config');
             }
         }
     }
+
+
 
     /**
      *  Checks if sf_config table exists    
